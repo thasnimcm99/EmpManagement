@@ -7,12 +7,12 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Copy the project files
+# Copy the .csproj file and restore dependencies
 COPY ["EmployeeFormApi/EmployeeFormApi.csproj", "EmployeeFormApi/"]
 RUN dotnet restore "EmployeeFormApi/EmployeeFormApi.csproj"
 
-# Copy the entire application
-COPY . .
+# Copy the rest of the application code
+COPY EmployeeFormApi/ EmployeeFormApi/
 WORKDIR "/src/EmployeeFormApi"
 
 # Build the application
